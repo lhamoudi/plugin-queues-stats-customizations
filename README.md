@@ -4,6 +4,8 @@ This basic plugin shows how the components on the Queues Stats View can be custo
 
 Features implemented by this plugin:
 
+* Filter by queue name
+  * Taken from an existing standalone plugin - [Queue Filter for Real-Time Queues View](https://github.com/twilio-professional-services/plugin-queues-view-filters) - this allows you to filter the visible list of queues, and multi-select too.
 * Add a column to `QueuesDataTable` to display "Longest Active" task duration, and stylizing it in red if it exceeds a configurable threshold.
   * “Longest Active” task duration requires digging into the Flex [insightsClient](https://www.twilio.com/docs/flex/developer/ui/manager#insightsclient) using liveQuery on the `tr-task` index - in order to find the longest active one.
   * NOTE: Use of liveQuery has a maximum result set of 200, and since we’ll be independently querying for active tasks on each queue, we’re limited to processing only 200 active tasks per queue at once. If you have a larger number of tasks than this in your queue, consider indicating this by means of a warning icon and hover text next to this stat.

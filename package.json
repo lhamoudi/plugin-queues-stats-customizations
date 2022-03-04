@@ -1,20 +1,21 @@
 {
   "name": "plugin-queues-stats-customizations",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "postinstall": "flex-plugin pre-script-check",
     "lazy-deploy": "twilio flex:plugins:deploy --major --changelog 'Lazy change description' --description 'Lazy plugin description'"
   },
   "dependencies": {
-    "@twilio/flex-plugin-scripts": "5.0.3",
     "react": "16.5.2",
     "react-dom": "16.5.2",
+    "@twilio/flex-plugin-scripts": "5.0.3",
     "react-emotion": "9.2.12"
   },
   "devDependencies": {
     "@twilio/flex-ui": "^1",
+    "eventemitter3": "4.0.0",
     "react-test-renderer": "16.5.2",
-    "eventemitter3": "4.0.0"
+    "@material-ui/core": "^3.9.3"
   }
 }

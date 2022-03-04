@@ -4,7 +4,7 @@ import { addTickListener, removeTickListener } from "./tick";
 /**
  * Lifted from Flex monorepo
  */
-export default class Ticker extends React.Component {
+class Ticker extends React.Component {
     tick = () => {
         this.forceUpdate();
     };
@@ -21,3 +21,5 @@ export default class Ticker extends React.Component {
         return this.props.children();
     }
 }
+
+export default Ticker;

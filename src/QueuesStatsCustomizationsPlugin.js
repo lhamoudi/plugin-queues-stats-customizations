@@ -1,10 +1,17 @@
 import React from "react";
 import { FlexPlugin } from "@twilio/flex-plugin";
-import { ColumnDefinition, QueuesStats } from "@twilio/flex-ui";
+import { ColumnDefinition } from "@twilio/flex-ui";
 
 import reducers, { namespace } from "./state";
 import { utils } from "./utils";
-import { ActiveTasksMonitor, LongestActiveTableCell, LongestWaitingTableCell, WaitingTasksTableCell } from "./components";
+import {
+  ActiveTasksMonitor,
+  LongestActiveTableCell,
+  LongestWaitingTableCell,
+  WaitingTasksTableCell,
+  QueueSelector,
+  QueueFilter
+} from "./components";
 
 const PLUGIN_NAME = "QueuesStatsCustomizationsPlugin";
 
@@ -62,11 +69,12 @@ export default class QueuesStatsCustomizationsPlugin extends FlexPlugin {
     // Create a new "Longest Active Time" column with custom formatting
     flex.QueuesStats.QueuesDataTable.Content.add(
       <ColumnDefinition
-      key="my-longest-active-time"
-      header="Longest"
-      content={(queue) => {
-        return <LongestActiveTableCell queue={queue}/>
-      }}/>,
+        key="my-longest-active-time"
+        header="Longest"
+        content={(queue) => {
+          return <LongestActiveTableCell queue={queue} />;
+        }}
+      />,
       { sortOrder: 1 } // Put this after the second column
     );
 
@@ -74,24 +82,33 @@ export default class QueuesStatsCustomizationsPlugin extends FlexPlugin {
     flex.QueuesStats.QueuesDataTable.Content.remove("waiting-tasks");
     flex.QueuesStats.QueuesDataTable.Content.add(
       <ColumnDefinition
-      key="my-waiting-tasks"
-      header="Waiting"
-      content={(queue) => {
-        return <WaitingTasksTableCell queue={queue}/>
-      }}/>,
+        key="my-waiting-tasks"
+        header="Waiting"
+        content={(queue) => {
+          return <WaitingTasksTableCell queue={queue} />;
+        }}
+      />,
       { sortOrder: 2 } // Put this after the third column
     );
-    
+
     // Replace "Longest Waiting Time" with a custom formatted one
     flex.QueuesStats.QueuesDataTable.Content.remove("longest-wait-time");
     flex.QueuesStats.QueuesDataTable.Content.add(
       <ColumnDefinition
-      key="my-longest-wait-time"
-      header="Longest"
-      content={(queue) => {
-        return <LongestWaitingTableCell queue={queue}/>
-      }}/>,
+        key="my-longest-wait-time"
+        header="Longest"
+        content={(queue) => {
+          return <LongestWaitingTableCell queue={queue} />;
+        }}
+      />,
       { sortOrder: 3 } // Put this after the fourth column
     );
-}
+
+    // Add the filter
+    flex.QueuesStatsView.Content.add(<QueueSelector key="queueSelector" />, {
+      align: 'start',
+      sortOrder: 0,
+    })
+    flex.MainContainer.Content.add(<QueueFilter key="queueFilter" />)
+  }
 }

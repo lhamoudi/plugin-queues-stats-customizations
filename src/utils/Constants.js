@@ -4,5 +4,4 @@ export default class Constants {
   static WAITING_TASKS_THRESHOLD = 1; 
   static LONGEST_WAITING_THRESHOLD_MS = 5*1000; // 5s for test    //30*1000;   // 30 mins
 
-
 }
